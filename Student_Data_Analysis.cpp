@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<conio.h>
 #include<stdlib.h>
+#define loop(i,n) for((i)=(0);(i)<(n);(i)++)
 typedef struct student
 {
 	char name[20];
@@ -15,8 +16,8 @@ void result(stu[],int,int);
 int main()
 {
 	stu s[50];
-	char ch;
-	int i=0,n=0,temp;
+	char c;
+	int i=0,n=0,temp,ch;
 	float p;
 	printf("\nEnter the students details below:-");
 	printf("\n__________________________________\n\n\n");
@@ -34,36 +35,42 @@ int main()
 		fflush(stdin);
 		s[i].per=s[i].marks/5;
 		printf("\n\nDo you want to continue(y/n)=");
-		scanf("%c",&ch);
+		scanf("%c",&c);
 		fflush(stdin);
 		i++;
 		printf("\n\n\n");
-	}while(ch=='y'||ch=='Y');
-	printf("\n.......................................................");
-	printf("\n.1)Press 1 for Overall Ranks.                         .");
-	printf("\n.2)Press 2 for Overall Pass Percantage of Students.   .");
-	printf("\n.3)Press 3 for Find out Result of a Student.          .");
-	printf("\n.......................................................");
-	printf("\nEnter your choice=");
-	scanf("%d",&ch);
-	switch(ch)
+	}while(c=='y'||c=='Y');
+	do
 	{
-		case 1:
-			rank(s,n);
-			break;
-		case 2:
-			p=pass(s,n);
-			printf("\nThe Overall Passing Percantage is=%.2f",p);
-			break;
-		case 3:
-			printf("\nEnter The roll no=");
-			scanf("%d",&temp);
-			result(s,n,temp);
-			break;
-		default:
-			printf("\nWrong Choice.");
-			exit(0);
-	}
+		printf("\n.......................................................");
+		printf("\n.1)Press 1 for Overall Ranks.                         .");
+		printf("\n.2)Press 2 for Overall Pass Percantage of Students.   .");
+		printf("\n.3)Press 3 for Find out Result of a Student.          .");
+		printf("\n.......................................................");
+		printf("\nEnter your choice=");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				rank(s,n);
+				break;
+			case 2:
+				p=pass(s,n);
+				printf("\nThe Overall Passing Percantage is=%.2f",p);
+				break;
+			case 3:
+				printf("\nEnter The roll no=");
+				scanf("%d",&temp);
+				result(s,n,temp);
+				break;
+			default:
+				printf("\nWrong Choice.");
+				exit(0);
+		}
+		fflush(stdin);
+		printf("\nDo you want to continue(y/n):");
+		scanf("%c",&c);
+	}while(c=='Y'||c=='y');
 	getch();
 	return 0;
 }
@@ -92,36 +99,36 @@ void output(stu s[],int i)
 void rank(stu s[],int n)
 {
 	int max=0,max2=0,max3=0,i;
-	for(i=0;i<n;i++)
+	loop(i,n)
 		if(s[i].marks>=max)
 			max=s[i].marks;
-	for(i=0;i<n;i++)
+	loop(i,n)
 	{
 		if(s[i].marks==max)
 			continue;
 		else if(s[i].marks>=max2)
 			max2=s[i].marks;
 	}
-	for(i=0;i<n;i++)
+	loop(i,n)
 	{
 		if(s[i].marks==max || s[i].marks==max2)
 			continue;
 		else if(s[i].marks>=max3)
 			max3=s[i].marks;
 	}
-	printf("\n1st Place is:-");
+	printf("\n\n\n1st Place is:-");
 	printf("\n______________");
-	for(i=0;i<n;i++)
+	loop(i,n)
 		if(s[i].marks==max)
 			output(s,i);
-	printf("\n2nd Place is:-");
+	printf("\n\n\n2nd Place is:-");
 	printf("\n______________");
-	for(i=0;i<n;i++)
+	loop(i,n)
 		if(s[i].marks==max2)
 			output(s,i);
-	printf("\n3rd Place is:-");
+	printf("\n\n\n3rd Place is:-");
 	printf("\n______________");
-	for(i=0;i<n;i++)
+	loop(i,n)
 		if(s[i].marks==max3)
 			output(s,i);
 }
